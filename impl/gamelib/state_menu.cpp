@@ -1,4 +1,5 @@
 ﻿#include "state_menu.hpp"
+
 #include <build_info.hpp>
 #include <color/color.hpp>
 #include <drawable_helpers.hpp>
@@ -7,14 +8,14 @@
 #include <input/input_manager.hpp>
 #include <lerp.hpp>
 #include <log/license_info.hpp>
-#include <algorithm>
 #include <screeneffects/vignette.hpp>
-#include <state_game.hpp>
+#include <state_box2d.hpp>
 #include <state_manager/state_manager_transition_fade_to_black.hpp>
 #include <text.hpp>
 #include <tweens/tween_alpha.hpp>
 #include <tweens/tween_color.hpp>
 #include <tweens/tween_position.hpp>
+#include <algorithm>
 
 void StateMenu::onCreate()
 {
@@ -203,7 +204,7 @@ void StateMenu::checkForTransitionToStateGame()
 {
     auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
 
-    if (std::any_of(std::begin(keysToTriggerTransition),std::end(keysToTriggerTransition) ,
+    if (std::any_of(std::begin(keysToTriggerTransition), std::end(keysToTriggerTransition),
             [this](auto const k) { return getGame()->input().keyboard()->justPressed(k); })) {
         startTransitionToStateGame();
     }
@@ -214,7 +215,7 @@ void StateMenu::startTransitionToStateGame()
     if (!m_started) {
         m_started = true;
         getGame()->stateManager().storeCurrentState("menu");
-        getGame()->stateManager().switchState(std::make_shared<StateGame>());
+        getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
     }
 }
 
