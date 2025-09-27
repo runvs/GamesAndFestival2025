@@ -11,12 +11,10 @@
 #include <platform_player.hpp>
 #include <screeneffects/vignette.hpp>
 #include <shape.hpp>
-#include <tilemap/tile_layer.hpp>
-#include <vector.hpp>
 
 class StatePlatformer : public jt::GameState {
 public:
-    explicit StatePlatformer(std::string const& levelName = "platformer_0_2.json");
+    explicit StatePlatformer(std::string const& levelName = "platformer_0_0.json");
 
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };

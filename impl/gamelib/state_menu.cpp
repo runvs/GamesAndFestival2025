@@ -25,8 +25,16 @@ void StateMenu::onCreate()
 
     add(std::make_shared<jt::LicenseInfo>());
 
-    getGame()->stateManager().setTransition(std::make_shared<jt::StateManagerTransitionFadeToBlack>(
-        GP::GetScreenSize(), textureManager()));
+    try {
+        auto bgm = getGame()->audio().getPermanentSound("bgm");
+        if (bgm == nullptr) {
+            std::cout << "load bgm\n";
+            bgm = getGame()->audio().addPermanentSound("bgm", "event:/music");
+            bgm->play();
+        }
+    } catch (std::exception const& e) {
+        getGame()->logger().error(e.what(), { "menu", "bgm" });
+    }
 }
 
 void StateMenu::onEnter()
@@ -202,7 +210,7 @@ void StateMenu::updateDrawables(float const& elapsed)
 
 void StateMenu::checkForTransitionToStateGame()
 {
-    auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::Enter };
+    auto const keysToTriggerTransition = { jt::KeyCode::Space, jt::KeyCode::W, jt::KeyCode::Enter };
 
     if (std::any_of(std::begin(keysToTriggerTransition), std::end(keysToTriggerTransition),
             [this](auto const k) { return getGame()->input().keyboard()->justPressed(k); })) {

@@ -116,7 +116,6 @@ void Player::handleMovement(float const elapsed)
     auto const preLandJumpTimeFrame = 0.1f;
 
     auto b2b = getB2Body();
-
     m_horizontalMovement = false;
 
     auto v = m_physicsObject->getVelocity();

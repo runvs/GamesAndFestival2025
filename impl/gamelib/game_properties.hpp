@@ -10,18 +10,15 @@ class GP {
 public:
     GP() = delete;
 
-    static std::string GameName() { return "MyAwesomeGame"; }
+    static std::string GameName() { return "MoonRunner"; }
 
-    static std::string AuthorName() { return "TODO"; }
+    static std::string AuthorName() { return "Laguna_999"; }
 
-    static std::string JamName() { return "TODO"; }
+    static std::string JamName() { return ""; }
 
-    static std::string JamDate() { return "TODO"; }
+    static std::string JamDate() { return "Games& Festival 2025"; }
 
-    static std::string ExplanationText()
-    {
-        return "Win the game\n[W,A,S,D] to move \n[Space] to jump\n[M/U] to mute/unmute audio";
-    }
+    static std::string ExplanationText() { return "[W,D] to move \n[W] to jump"; }
 
     static jt::Vector2f GetWindowSize() { return jt::Vector2f { 1024, 768 }; }
 
