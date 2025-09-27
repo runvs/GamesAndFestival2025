@@ -1,14 +1,14 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
-#include <contact_callback_player_enemy.hpp>
-#include <contact_callback_player_ground.hpp>
-#include <level.hpp>
-#include <platform_player.hpp>
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
+#include <contact_callback_player_enemy.hpp>
+#include <contact_callback_player_ground.hpp>
 #include <game_state.hpp>
+#include <level.hpp>
 #include <particle_system.hpp>
+#include <platform_player.hpp>
 #include <screeneffects/vignette.hpp>
 #include <shape.hpp>
 #include <tilemap/tile_layer.hpp>
@@ -16,7 +16,7 @@
 
 class StatePlatformer : public jt::GameState {
 public:
-    explicit StatePlatformer(std::string const& levelName = "platformer_0_0.json");
+    explicit StatePlatformer(std::string const& levelName = "platformer_0_2.json");
 
 private:
     std::shared_ptr<jt::Box2DWorldInterface> m_world { nullptr };
