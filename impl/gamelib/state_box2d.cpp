@@ -1,5 +1,6 @@
 ﻿#include "state_box2d.hpp"
 
+#include "game_properties.hpp"
 #include "state_menu.hpp"
 #include <box2dwrapper/box2d_contact_manager.hpp>
 #include <box2dwrapper/box2d_world_impl.hpp>
@@ -33,7 +34,7 @@ void StatePlatformer::onCreate()
     playerEnemyContactListener->setPlayer(m_player);
     m_world->getContactManager().registerCallback("player_enemy", playerEnemyContactListener);
 
-    m_vignette = std::make_shared<jt::Vignette>(jt::Vector2f { 400.0f, 300.0f });
+    m_vignette = std::make_shared<jt::Vignette>(GP::GetScreenSize());
     add(m_vignette);
     setAutoDraw(false);
 }

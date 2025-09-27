@@ -1,7 +1,7 @@
 #include "platform_player.hpp"
-#include <user_data_entries.hpp>
 #include <game_interface.hpp>
 #include <math_helper.hpp>
+#include <user_data_entries.hpp>
 
 Player::Player(std::shared_ptr<jt::Box2DWorldInterface> world)
 {
@@ -120,7 +120,11 @@ void Player::handleMovement(float const elapsed)
     m_horizontalMovement = false;
 
     auto v = m_physicsObject->getVelocity();
-    if (getGame()->input().keyboard()->pressed(jt::KeyCode::D)) {
+    auto const kb = getGame()->input().keyboard().get();
+    auto gp = getGame()->input().gamepad(0).get();
+    auto const dpad = gp->getAxis(jt::GamepadAxisCode::DPad);
+
+    if (kb->pressed(jt::KeyCode::D) || dpad.x > 0.5f) {
         if (v.x < 0) {
             v.x *= 0.9f;
         }
@@ -128,7 +132,7 @@ void Player::handleMovement(float const elapsed)
         m_horizontalMovement = true;
     }
 
-    if (getGame()->input().keyboard()->pressed(jt::KeyCode::A)) {
+    if (kb->pressed(jt::KeyCode::A) || dpad.x < -0.5f) {
         if (v.x > 0) {
             v.x *= 0.9f;
         }
@@ -136,7 +140,7 @@ void Player::handleMovement(float const elapsed)
         m_horizontalMovement = true;
     }
 
-    if (getGame()->input().keyboard()->justPressed(jt::KeyCode::W)) {
+    if (kb->justPressed(jt::KeyCode::W) || gp->justPressed(jt::GamepadButtonCode::GBA)) {
         if (m_wantsToJumpTimer <= 0.0f) {
             m_wantsToJumpTimer = preLandJumpTimeFrame;
         }
@@ -150,7 +154,7 @@ void Player::handleMovement(float const elapsed)
         }
     }
 
-    if (getGame()->input().keyboard()->pressed(jt::KeyCode::W)) {
+    if (kb->pressed(jt::KeyCode::W) || gp->pressed(jt::GamepadButtonCode::GBA)) {
         if (v.y < 0) {
             b2b->ApplyForceToCenter(b2Vec2 { 0, jumpVerticalAcceleration }, true);
         }
@@ -183,6 +187,7 @@ void Player::handleMovement(float const elapsed)
 
     m_physicsObject->setVelocity(v);
 }
+
 b2Body* Player::getB2Body() { return m_physicsObject->getB2Body(); }
 
 void Player::doDraw() const { m_animation->draw(renderTarget()); }
