@@ -227,6 +227,7 @@ void StateMenu::startTransitionToStateGame()
 {
     if (!m_started) {
         m_started = true;
+
         getGame()->stateManager().storeCurrentState("menu");
         getGame()->stateManager().switchState(std::make_shared<StatePlatformer>());
     }
@@ -235,10 +236,10 @@ void StateMenu::startTransitionToStateGame()
 void StateMenu::onDraw() const
 {
     m_background->draw(renderTarget());
-
     m_textTitle->draw(renderTarget());
     m_textStart->draw(renderTarget());
     m_textExplanation->draw(renderTarget());
+
     m_textCredits->draw(renderTarget());
     m_textVersion->draw(renderTarget());
     m_overlay->draw(renderTarget());
