@@ -111,7 +111,7 @@ void StatePlatformer::handleCameraScrolling(float const elapsed)
     float const scrollSpeed = 60.0f;
     auto& cam = getGame()->gfx().camera();
 
-    auto const screenWidth = 400.0f;
+    auto const screenWidth = 0.5f * 1024.0f;
     if (ps.x < leftMargin) {
         cam.move(jt::Vector2f { -scrollSpeed * elapsed, 0.0f });
         if (ps.x < rightMargin / 2) {
