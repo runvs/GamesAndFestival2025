@@ -1,6 +1,7 @@
 ﻿#ifndef DEMO_STATE_PLATFORMER_HPP
 #define DEMO_STATE_PLATFORMER_HPP
 
+#include "screeneffects/scanlines.hpp"
 #include <box2dwrapper/box2d_object.hpp>
 #include <box2dwrapper/box2d_world_interface.hpp>
 #include <contact_callback_player_enemy.hpp>
@@ -23,6 +24,7 @@ private:
     std::shared_ptr<Level> m_level { nullptr };
     std::shared_ptr<Player> m_player { nullptr };
     std::shared_ptr<jt::Vignette> m_vignette { nullptr };
+    std::shared_ptr<jt::ScanLines> m_scanlines { nullptr };
 
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_walkParticles { nullptr };
     std::shared_ptr<jt::ParticleSystem<jt::Shape, 50>> m_playerJumpParticles { nullptr };

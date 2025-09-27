@@ -47,6 +47,10 @@ void StateMenu::createVignette()
 {
     m_vignette = std::make_shared<jt::Vignette>(GP::GetScreenSize());
     add(m_vignette);
+
+    m_scanlines = std::make_shared<jt::ScanLines>(
+        jt::Vector2f { GP::GetScreenSize().x, GP::GetScreenSize().y / 256 }, 256);
+    add(m_scanlines);
 }
 
 void StateMenu::createShapes()
@@ -206,6 +210,7 @@ void StateMenu::updateDrawables(float const& elapsed)
     m_textVersion->update(elapsed);
     m_overlay->update(elapsed);
     m_vignette->update(elapsed);
+    m_scanlines->update(elapsed);
 }
 
 void StateMenu::checkForTransitionToStateGame()
@@ -237,6 +242,7 @@ void StateMenu::onDraw() const
     m_textCredits->draw(renderTarget());
     m_textVersion->draw(renderTarget());
     m_overlay->draw(renderTarget());
+    m_scanlines->draw();
     m_vignette->draw();
 }
 

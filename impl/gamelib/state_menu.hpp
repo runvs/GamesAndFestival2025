@@ -1,6 +1,7 @@
 ﻿#ifndef GAME_STATE_MENU_HPP
 #define GAME_STATE_MENU_HPP
 
+#include "screeneffects/scanlines.hpp"
 #include <game_state.hpp>
 
 namespace jt {
@@ -30,6 +31,7 @@ private:
 
     std::shared_ptr<jt::Shape> m_overlay;
     std::shared_ptr<jt::Vignette> m_vignette;
+    std::shared_ptr<jt::ScanLines> m_scanlines { nullptr };
 
     int m_score { 0 };
 
@@ -54,7 +56,7 @@ private:
     void createTweenExplanation();
 
     void onUpdate(float const elapsed) override;
-    void updateDrawables(const float& elapsed);
+    void updateDrawables(float const& elapsed);
     void checkForTransitionToStateGame();
     void startTransitionToStateGame();
 

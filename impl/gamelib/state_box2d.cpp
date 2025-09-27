@@ -36,6 +36,11 @@ void StatePlatformer::onCreate()
 
     m_vignette = std::make_shared<jt::Vignette>(GP::GetScreenSize());
     add(m_vignette);
+
+    m_scanlines = std::make_shared<jt::ScanLines>(
+        jt::Vector2f { GP::GetScreenSize().x, GP::GetScreenSize().y / 256 }, 256);
+    add(m_scanlines);
+
     setAutoDraw(false);
 }
 
@@ -144,6 +149,7 @@ void StatePlatformer::onDraw() const
     m_player->draw();
     m_walkParticles->draw();
     m_playerJumpParticles->draw();
+    m_scanlines->draw();
     m_vignette->draw();
 }
 
